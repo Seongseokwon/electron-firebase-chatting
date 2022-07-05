@@ -2,6 +2,7 @@ import {Injectable, NgZone} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
+import * as auth from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class AuthService {
     })
   }
 
-  SignIn(email: string, password: string) {
+  signIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then(result => {
@@ -39,12 +40,30 @@ export class AuthService {
       })
   }
 
-  SignUp(email: string, password: string){
+  signUp(email: string, password: string){
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
         console.log(result);
       })
   }
+
+  googleAuth() {
+    return this.authLogin(new auth.GoogleAuthProvider()).then(res => {
+      console.log(res);
+    })
+  }
+
+  authLogin(provider: any) {
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        window.alert(error);
+      })
+  }
+
 
 }

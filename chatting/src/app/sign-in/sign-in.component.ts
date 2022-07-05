@@ -19,6 +19,10 @@ export class SignInComponent implements OnInit {
   onLogin(form : NgForm): void {
     const value = form.value;
     const { email, password} = value;
-    this.authService.SignIn(email, password).then(r => console.log(r));
+    this.authService.signIn(email, password);
+  }
+
+  onGoogleLogin() :void {
+    this.authService.googleAuth()
   }
 }

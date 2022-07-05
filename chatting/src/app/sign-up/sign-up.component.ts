@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
   onSignUp(form: NgForm): void {
     const value = form.value;
     const {email, password} = value;
-    this.authService.SignUp(email, password);
+    this.authService.signUp(email, password);
   }
 
 }
