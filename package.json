@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "watch": "nodemon --exec electron ."
+    "watch": "nodemon --exec electron .",
+    "front:build": "cd chatting && ng build"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,5 @@
   "devDependencies": {
     "electron": "^19.0.7",
     "nodemon": "^2.0.18"
-  },
-  "dependencies": {
-    "firebase": "^9.8.4"
   }
 }
