@@ -4,6 +4,8 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import * as auth from 'firebase/auth';
 import {User} from "./user";
+import {BehaviorSubject} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ import {User} from "./user";
 export class AuthService {
 
   userData: any;
+  userLoginSubscription = new BehaviorSubject<any>(null);
 
   constructor(
     public afs: AngularFirestore,
@@ -35,7 +38,12 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then(result => {
-        console.log(result);
+        this.userLoginSubscription.next(result.user);
+        this.setUserData(result.user);
+        this.ngZone.run(() => {
+          this.router.navigate(['chatting']);
+        })
+
       })
       .catch(error => {
         window.alert(error.message);
@@ -46,7 +54,10 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
-        console.log(result);
+        this.setUserData(result.user);
+      })
+      .catch(error => {
+        window.alert(error.message);
       })
   }
 
@@ -57,6 +68,7 @@ export class AuthService {
   }
 
   setUserData(user: any) {
+    console.log(user);
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -78,7 +90,7 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then(result => {
-        console.log(result);
+        this.setUserData(result.user);
       })
       .catch(error => {
         window.alert(error);
@@ -87,6 +99,7 @@ export class AuthService {
 
   signOut()  {
     return this.afAuth.signOut().then(() => {
+      this.userLoginSubscription.next(null);
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     })

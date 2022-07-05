@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent
+  },
+  {
+    path: 'chatting',
+    loadChildren: () => import('./chatting/chatting.module').then(m => m.ChattingModule)
   }
 ];
 
