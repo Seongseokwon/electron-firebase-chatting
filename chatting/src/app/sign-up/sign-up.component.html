@@ -1,0 +1,18 @@
+<div>
+  <form  (ngSubmit)="onSignUp(signupForm)" #signupForm="ngForm">
+    <div>
+      <label for="email">Email</label>
+      <input name="email" type="text" id="email" ngModel>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input name="password" type="password" id="password" ngModel>
+    </div>
+
+    <button type="submit">회원가입</button>
+  </form>
+  <div>
+    <button routerLink="/sign-in">로그인 페이지 이동</button>
+  </div>
+</div>
+
