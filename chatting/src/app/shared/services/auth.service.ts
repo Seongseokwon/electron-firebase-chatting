@@ -15,16 +15,20 @@ export class AuthService {
   userData: any;
   userLoginSubscription = new BehaviorSubject<any>(null);
 
+
   constructor(
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone
   ) {
+
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        console.log(user);
+
         this.userData = user;
+        this.userData['isLogin'] = true;
+        this.userLoginSubscription.next(this.userData);
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
@@ -39,10 +43,17 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(result => {
         this.userLoginSubscription.next(result.user);
-        this.setUserData(result.user);
+        const userInfo: User = {
+          uid: result.user?.uid!,
+          isLogin: true,
+          photoURL: result.user?.photoURL!,
+          displayName: result.user?.displayName!,
+          email: result.user?.email!,
+        }
+        this.setUserData(userInfo);
         this.ngZone.run(() => {
-          this.router.navigate(['chatting']);
-        })
+          this.router.navigate(['user']);
+        });
 
       })
       .catch(error => {
@@ -50,11 +61,21 @@ export class AuthService {
       })
   }
 
-  signUp(email: string, password: string){
+  signUp(email: string, password: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
-        this.setUserData(result.user);
+        const userInfo: User = {
+          uid: result.user?.uid!,
+          isLogin: false,
+          photoURL: result.user?.photoURL!,
+          displayName: result.user?.displayName!,
+          email: result.user?.email!,
+        }
+        this.setUserData(userInfo);
+        this.ngZone.run(() => {
+          this.router.navigate(['sign-in']);
+        })
       })
       .catch(error => {
         window.alert(error.message);
@@ -73,12 +94,12 @@ export class AuthService {
       `users/${user.uid}`
     );
 
-    const userData : User = {
+    const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      isLogin: user.isLogin
     }
 
     return userRef.set(userData, {
@@ -90,16 +111,29 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then(result => {
-        this.setUserData(result.user);
+        const userInfo: User = {
+          uid: result.user?.uid!,
+          isLogin: true,
+          photoURL: result.user?.photoURL!,
+          displayName: result.user?.displayName!,
+          email: result.user?.email!,
+        }
+        this.setUserData(userInfo);
+        this.ngZone.run(() => {
+          this.router.navigate(['user']);
+        })
       })
       .catch(error => {
         window.alert(error);
       })
   }
 
-  signOut()  {
+  signOut(uid: string) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${uid}`
+    );
+    userRef.update({isLogin : false});
     return this.afAuth.signOut().then(() => {
-      this.userLoginSubscription.next(null);
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     })
