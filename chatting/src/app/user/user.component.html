@@ -1,13 +1,14 @@
 <div>
   <!-- 나의 회원 카드 -->
-  <section class="">
+  <section class="my-card">
+    <h2>Me</h2>
     <div class="user-card">
       <div class="user-card__profile-img">
-        <img *ngIf="myInfo.photoURL === null || myInfo.photoURL === undefined" src="../../assets/images/avatar-empty_64-remove.png" alt="profile-image">
+        <img *ngIf="myInfo.photoURL === null || myInfo.photoURL === undefined" src="./assets/images/avatar-empty_320-remove.png" alt="profile-image" id="empty">
         <img *ngIf="myInfo.photoURL !== null && myInfo.photoURL !== undefined" src="{{myInfo.photoURL}}" referrerpolicy="no-referrer" alt="profile-image">
       </div>
       <div class="user-card__basic-profile">
-        <p>닉네임</p>
+        <p>{{myInfo.displayName}}</p>
         <p>상태</p>
         <!--  quick button  -->
         <div>

@@ -42,10 +42,10 @@ button {
   background: none;
   border: 0;
   cursor: pointer;
+}
 
-  &:disabled {
-    cursor: not-allowed;
-  }
+button:disabled {
+  cursor: not-allowed;
 }
 
 a {
@@ -59,8 +59,8 @@ table {
 
 input {
   outline: none;
+}
 
-  &:disabled {
-    cursor: not-allowed;
-  }
+input:disabled {
+  cursor: not-allowed;
 }

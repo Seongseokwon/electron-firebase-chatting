@@ -2,3 +2,6 @@
 @import url('../src/content/scss/reset.scss');
 @import url('../src/content/scss/layout.scss');
 @import url('../src/content/scss/user.scss');
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -10,14 +10,15 @@ const createWindow = () => {
         center: true,
 
         webPreferences: {
-            enableRemoteModule: true,
-            allowRunningInsecureContent: true,
-            webSecurity: false,
+            nodeIntegration: true,
+            nodeIntegrationInSubFrames: true
 
         }
     });
 
-    win.loadFile('./chatting/dist/index.html');
+
+    // win.loadFile('./chatting/dist/index.html', {userAgent : 'Chrome'});
+    win.loadURL("http://localhost:4200",{userAgent: 'Chrome'});
     win.once('ready-to-show', () => {
         win.show();
     })

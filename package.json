@@ -23,5 +23,8 @@
   "devDependencies": {
     "electron": "^19.0.7",
     "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "firebase": "^9.8.4"
   }
 }

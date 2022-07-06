@@ -1,10 +1,18 @@
 
 <div class="wrapper">
-  <header>
-    <h1>채팅</h1>
+  <!-- header -->
+  <header class="header">
+    <h1>채팅앱</h1>
     <div>
       <button *ngIf="isLogin" (click)="onLogout()">로그아웃</button>
     </div>
   </header>
+  <!-- // header -->
   <router-outlet></router-outlet>
+  <footer class="footer">
+    <button>사용자</button>
+    <button>채팅</button>
+    <button>소식</button>
+    <button>마이</button>
+  </footer>
 </div>

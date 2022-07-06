@@ -1,4 +1,27 @@
-.user-card{
+.my-card {
   display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 
+.user-card {
+  display: flex;
+  width: 100%;
+}
+
+.user-card__profile-img {
+  flex-basis: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-card__profile-img > img {
+  border-radius: 50%;
+}
+.user-card__profile-img > img#empty {
+  height: 100px;
+}
+
+.user-card__basic-profile {
+  flex-basis: 80%;
 }
