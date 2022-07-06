@@ -4,7 +4,7 @@
     <h2>Me</h2>
     <div class="user-card">
       <div class="user-card__profile-img">
-        <img *ngIf="myInfo.photoURL === null || myInfo.photoURL === undefined" src="./assets/images/avatar-empty_320-remove.png" alt="profile-image" id="empty">
+        <img *ngIf="myInfo.photoURL === null || myInfo.photoURL === undefined" src="./assets/images/avatar-empty_320-remove.png" alt="profile-image" class="empty">
         <img *ngIf="myInfo.photoURL !== null && myInfo.photoURL !== undefined" src="{{myInfo.photoURL}}" referrerpolicy="no-referrer" alt="profile-image">
       </div>
       <div class="user-card__basic-profile">
@@ -20,12 +20,40 @@
   </section>
   <!-- 접속중인 회원 -->
   <section>
-    <div>
-
+    <h2>Connect</h2>
+    <div class="user-card">
+      <div class="user-card__profile-img">
+        <img  src="./assets/images/avatar-empty_320-remove.png" alt="profile-image" class="empty">
+<!--        <img *ngIf="myInfo.photoURL !== null && myInfo.photoURL !== undefined" src="{{myInfo.photoURL}}" referrerpolicy="no-referrer" alt="profile-image">-->
+      </div>
+      <div class="user-card__basic-profile">
+        <p>{{myInfo.displayName}}</p>
+        <p>상태</p>
+        <!--  quick button  -->
+        <div>
+          <button>1</button>
+          <button>2</button>
+        </div>
+      </div>
     </div>
   </section>
   <!--  비접속 회원-->
   <section>
-
+    <h2>Disconnect</h2>
+    <div class="user-card">
+      <div class="user-card__profile-img">
+        <img  src="./assets/images/avatar-empty_320-remove.png" alt="profile-image" class="empty">
+<!--        <img *ngIf="myInfo.photoURL !== null && myInfo.photoURL !== undefined" src="{{myInfo.photoURL}}" referrerpolicy="no-referrer" alt="profile-image">-->
+      </div>
+      <div class="user-card__basic-profile">
+        <p>{{myInfo.displayName}}</p>
+        <p>상태</p>
+        <!--  quick button  -->
+        <div>
+          <button>1</button>
+          <button>2</button>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
