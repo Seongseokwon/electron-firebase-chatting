@@ -1,8 +1,10 @@
 
-<header>
-  <h1>채팅</h1>
-  <div>
-    <button *ngIf="isLogin" (click)="onLogout()">로그아웃</button>
-  </div>
-</header>
-<router-outlet></router-outlet>
+<div class="wrapper">
+  <header>
+    <h1>채팅</h1>
+    <div>
+      <button *ngIf="isLogin" (click)="onLogout()">로그아웃</button>
+    </div>
+  </header>
+  <router-outlet></router-outlet>
+</div>

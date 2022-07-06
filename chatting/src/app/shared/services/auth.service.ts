@@ -61,7 +61,7 @@ export class AuthService {
       })
   }
 
-  signUp(email: string, password: string) {
+  signUp(email: string, password: string, displayName: string) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then(result => {
@@ -69,7 +69,7 @@ export class AuthService {
           uid: result.user?.uid!,
           isLogin: false,
           photoURL: result.user?.photoURL!,
-          displayName: result.user?.displayName!,
+          displayName,
           email: result.user?.email!,
         }
         this.setUserData(userInfo);

@@ -1,4 +1,22 @@
 <div>
+  <!-- 나의 회원 카드 -->
+  <section class="">
+    <div class="user-card">
+      <div class="user-card__profile-img">
+        <img *ngIf="myInfo.photoURL === null || myInfo.photoURL === undefined" src="../../assets/images/avatar-empty_64-remove.png" alt="profile-image">
+        <img *ngIf="myInfo.photoURL !== null && myInfo.photoURL !== undefined" src="{{myInfo.photoURL}}" referrerpolicy="no-referrer" alt="profile-image">
+      </div>
+      <div class="user-card__basic-profile">
+        <p>닉네임</p>
+        <p>상태</p>
+        <!--  quick button  -->
+        <div>
+          <button>1</button>
+          <button>2</button>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- 접속중인 회원 -->
   <section>
     <div>
